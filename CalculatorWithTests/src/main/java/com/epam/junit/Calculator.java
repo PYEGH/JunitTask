@@ -1,8 +1,8 @@
 package com.epam.junit;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+import org.apache.log4j.Logger;
 
 public class Calculator {
 
@@ -14,6 +14,8 @@ public class Calculator {
 	 * @return
 	 */
 	public int addition(final int a, final int b) {
+		final LoggerService loggerService = new LoggerServiceImpl();
+		final LoggerWrapper loggerWrapper = loggerService.getLoggerWrapper();
 		return a + b;
 	}
 
