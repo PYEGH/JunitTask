@@ -1,13 +1,22 @@
 package com.epam.junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
+import static org.hamcrest.Matchers.arrayWithSize;
+import static org.hamcrest.Matchers.everyItem;
 
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
+
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -33,7 +42,8 @@ public class CalculatorPositiveTests {
 		LoggerWrapper loggerWrapper = Mockito.mock(LoggerWrapper.class);
 		LoggerService loggerService = Mockito.mock(LoggerService.class);
 
-		Mockito.when(loggerService.getLoggerWrapper()).thenReturn(loggerWrapper);
+		Mockito.when(loggerService.getLoggerWrapper())
+				.thenReturn(loggerWrapper);
 		int a = 5;
 		int b = 10;
 		int result = calculator.addition(a, b);
@@ -168,6 +178,37 @@ public class CalculatorPositiveTests {
 		boolean result;
 		result = calculator.isPrime(primeNumber);
 		assertFalse(result);
+	}
+
+	// Positive scenario for checking of Fibonacci sequence
+	@Test()
+	public void test_IsFibonacciSequence() {
+		final int sequenceSize = 5;
+		ArrayList<Integer> sequence = calculator
+				.generateFiboncciSequence(sequenceSize);
+
+		assertThat(sequence.toArray(), arrayWithSize(greaterThan(1))); // sequence
+																		// must
+																		// be
+																		// not
+																		// empty
+		assertThat(sequence, hasItem(equalTo(1))); // sequence must have number
+													// with value '1'
+		assertThat(sequence, everyItem(greaterThan(0))); // only value > 0 is
+															// allowed
+
+		int temp;
+		int n = 1;
+		int n_1 = 1;
+		// Checking for elements of collection:
+		// Calculate i element of real Fibonacci sequence and compare it with
+		// elem form provided collection
+		for (int i = 0; i < sequenceSize - 1; i++) {
+			assertThat(sequence, hasItem(n));
+			temp = n;
+			n = n + n_1;
+			n_1 = temp;
+		}
 	}
 
 }
