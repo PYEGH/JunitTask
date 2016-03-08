@@ -97,19 +97,19 @@ public class Calculator {
 			} else {
 				throw new IllegalArgumentException("Division by 0");
 			}
-		} else if (a instanceof Float && a instanceof Float) {
+		} else if (a instanceof Float && b instanceof Float) {
 			if ((Float) b != 0) {
 				return (Float) a / (Float) b;
 			} else {
 				throw new IllegalArgumentException("Division by 0");
 			}
-		} else if (a instanceof Integer && a instanceof Float) {
+		} else if (a instanceof Integer && b instanceof Float) {
 			if ((Float) b != 0) {
 				return (Integer) a / (Float) b;
 			} else {
 				throw new IllegalArgumentException("Division by 0");
 			}
-		} else if (a instanceof Float && a instanceof Integer) {
+		} else if (a instanceof Float && b instanceof Integer) {
 			if ((Integer) b != 0) {
 				return (Float) a / (Integer) b;
 			} else {
@@ -187,7 +187,7 @@ public class Calculator {
 	}
 
 	public boolean isPrime(int number) {
-		boolean isPrime = true;
+		boolean primeNumber = true;
 		int temp;
 
 		for (int i = 2; i <= number / 2; i++) {
@@ -200,12 +200,12 @@ public class Calculator {
 						"Incorrect input param were provided");
 			}
 			if (temp == 0) {
-				isPrime = false;
+				primeNumber = false;
 				break;
 			}
 		}
 
-		return isPrime;
+		return primeNumber;
 	}
 
 	public ArrayList<Integer> generateFiboncciSequence(int sizeOfSequence) {
